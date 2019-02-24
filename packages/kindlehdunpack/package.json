@@ -1,6 +1,6 @@
 {
   "name": "kindlehdunpack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "以 node.js 包裝後的 kindlehdunpack",
   "keywords": [
     "amazon",

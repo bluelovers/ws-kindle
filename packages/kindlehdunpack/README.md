@@ -14,6 +14,8 @@ npm install -g kindlehdunpack
 
 > 此工具 windows 限定，由 兴国物语 提供
 
+用來提取 azw.res 裡面的圖檔
+
 ### 自動搜尋目前目錄下的檔案並且提取
 
 ```
