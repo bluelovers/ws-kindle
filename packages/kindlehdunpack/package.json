@@ -1,0 +1,61 @@
+{
+  "name": "kindlehdunpack",
+  "version": "1.0.0",
+  "description": "以 node.js 包裝後的 kindlehdunpack",
+  "keywords": [
+    "amazon",
+    "azw",
+    "azw.res",
+    "azw6",
+    "book",
+    "cli",
+    "decompress",
+    "e-book",
+    "e-readers",
+    "ebook",
+    "ereaders",
+    "exe",
+    "extract",
+    "file",
+    "files",
+    "glob",
+    "image",
+    "images",
+    "kindle",
+    "node-novel",
+    "novel",
+    "pack",
+    "unpack",
+    "windows"
+  ],
+  "homepage": "https://github.com/bluelovers/ws-kindle/packages/kindlehdunpack#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/ws-kindle/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelovers/ws-kindle.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "bin": {
+    "kindlehdunpack": "bin/kindlehdunpack.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cross-spawn-extra": "^1.0.4",
+    "debug-color2": "^1.0.6",
+    "fast-glob": "^2.2.6",
+    "fs-extra": "^7.0.1",
+    "moment": "^2.24.0",
+    "nanoid": "^2.0.1",
+    "yargs": "^13.2.1"
+  },
+  "devDependencies": {}
+}
