@@ -82,7 +82,7 @@ export function binpath(options: IOptions = {}): string
 			return file;
 		}
 
-		return path.join(__dirname, 'bin', 'kindlehdunpack.exe')
+		return path.join(__dirname, 'bin', 'exe', 'kindlehdunpack.exe')
 	}
 }
 

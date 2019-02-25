@@ -45,7 +45,7 @@ function binpath(options = {}) {
         if (bool) {
             return file;
         }
-        return path.join(__dirname, 'bin', 'kindlehdunpack.exe');
+        return path.join(__dirname, 'bin', 'exe', 'kindlehdunpack.exe');
     }
 }
 exports.binpath = binpath;
