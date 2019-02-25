@@ -4,7 +4,12 @@
 
 import path = require('path');
 import { async as crossSpawnAsync, sync as crossSpawnSync } from 'cross-spawn-extra';
-import { SpawnOptions, SpawnSyncOptions, SpawnSyncOptionsWithBufferEncoding, SpawnSyncOptionsWithStringEncoding } from "cross-spawn-extra/type";
+import {
+	SpawnOptions,
+	SpawnSyncOptions,
+	SpawnSyncOptionsWithBufferEncoding,
+	SpawnSyncOptionsWithStringEncoding,
+} from "cross-spawn-extra/type";
 import fs = require('fs-extra');
 import nanoid = require('nanoid');
 import os = require('os');
@@ -85,16 +90,18 @@ export function handleFile({
 
 	let list_match = match_images(imgs_hd, imgs_epub);
 
-	list_match.forEach(function (data)
-	{
-		if (data.epub)
+	list_match
+		.forEach(function (data)
 		{
-			fs.copyFileSync(data.hd, data.epub);
-		}
-		{
-			console.warn(`找不到配對的圖片 ${path.basename(data.hd)}`);
-		}
-	});
+			if (data.epub)
+			{
+				fs.copyFileSync(data.hd, data.epub);
+			}
+			else
+			{
+				console.warn(`找不到配對的圖片 ${path.basename(data.hd)}`);
+			}
+		});
 
 	return lazy_epub(tmpPath, list_match)
 		.then(async function (data)
@@ -120,7 +127,7 @@ export function handleFile({
 				buffer: data.buffer,
 			}
 		})
-	;
+		;
 }
 
 export async function lazy_epub(tmpPath: string, list_match: ReturnType<typeof match_images>)
@@ -193,7 +200,7 @@ export function match_images(imgs_hd: string[], imgs_epub: string[])
 			hd: string,
 			epub: string,
 		}[])
-	;
+		;
 }
 
 export function list_imgs(tmpPath: string)

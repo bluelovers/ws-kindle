@@ -1,6 +1,6 @@
 {
   "name": "@node-kindle/merge-awz-res-hd-images",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "提取 azw 並且替換為 azw.res 內的圖片後重新打包成新的電子書",
   "keywords": [
     "@node-kindle",

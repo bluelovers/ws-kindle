@@ -51,11 +51,12 @@ function handleFile({ azwFile, resFile, }, outPath) {
         throw new Error(`res 中不存在圖片 或者 提取失敗`);
     }
     let list_match = match_images(imgs_hd, imgs_epub);
-    list_match.forEach(function (data) {
+    list_match
+        .forEach(function (data) {
         if (data.epub) {
             fs.copyFileSync(data.hd, data.epub);
         }
-        {
+        else {
             console.warn(`找不到配對的圖片 ${path.basename(data.hd)}`);
         }
     });
