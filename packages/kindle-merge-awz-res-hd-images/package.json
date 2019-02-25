@@ -1,0 +1,51 @@
+{
+  "name": "@node-kindle/merge-awz-res-hd-images",
+  "version": "1.0.0",
+  "description": "提取 azw 並且替換為 azw.res 內的圖片後重新打包成新的電子書",
+  "keywords": [
+    "@node-kindle",
+    "amazon",
+    "ebook",
+    "epub",
+    "kindle",
+    "kindle-merge-res",
+    "merge-awz-res-hd-images",
+    "mobi",
+    "node-kindle"
+  ],
+  "homepage": "https://github.com/bluelovers/ws-kindle/tree/master/packages/kindle-merge-awz-res-hd-images#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/ws-kindle/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelovers/ws-kindle.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "bin": {
+    "merge-awz-res-hd-images": "bin/cli.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@node-kindle/utils": "^1.0.0",
+    "@types/jszip": "^3.1.5",
+    "cross-spawn-extra": "^1.0.4",
+    "fast-glob": "^2.2.6",
+    "fs-extra": "^7.0.1",
+    "jszip": "^3.2.0",
+    "kindlehdunpack": "^1.0.1",
+    "string-natural-compare": "^2.0.3",
+    "yargs": "^13.2.1"
+  },
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
+}

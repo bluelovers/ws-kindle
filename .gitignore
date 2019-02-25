@@ -2,3 +2,5 @@
 /res/
 /yarn.lock
 /yarn-error.log
+/packages/*/test/
+/packages/*/test/temp
