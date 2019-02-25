@@ -44,10 +44,10 @@ function handleFile({ azwFile, resFile, }, outPath) {
     });
     let imgs_epub = list_imgs_epub(tmpPath);
     let imgs_hd = list_imgs(path_imgs_hd);
-    if (imgs_epub.length) {
-        throw new Error(`awz 中不存在圖片 或者 提取失敗`);
+    if (!imgs_epub.length) {
+        throw new Error(`azw 中不存在圖片 或者 提取失敗`);
     }
-    if (imgs_hd.length) {
+    if (!imgs_hd.length) {
         throw new Error(`res 中不存在圖片 或者 提取失敗`);
     }
     let list_match = match_images(imgs_hd, imgs_epub);
