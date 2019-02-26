@@ -2,6 +2,8 @@
  * Created by user on 2019/2/24.
  */
 
+/// <reference types="node" />
+
 import path = require('path');
 import { async as crossSpawnAsync, sync as crossSpawnSync } from 'cross-spawn-extra';
 import fs = require('fs-extra');
@@ -179,12 +181,14 @@ export function handleGlobFile(glob?: string[], options: IOptions = {})
 	{
 		options.log && console.gray.info(files);
 
-		handleFiles(files, {
+		let r = handleFiles(files, {
 			...options,
 			output,
 		});
 
 		options.log && console.debug(`結束`);
+
+		return r;
 	}
 	else
 	{
@@ -197,13 +201,17 @@ export function handleFiles(files: string[], options: IOptions = {})
 {
 	const output = options && options.output;
 
-	files.forEach(function (file)
+	return files.reduce(function (a, file)
 	{
-		handleFile(file, {
+		let r = handleFile(file, {
 			...options,
 			output,
-		})
-	});
+		});
+
+		a.push(r);
+
+		return a;
+	}, [] as ReturnType<typeof handleFile>[]);
 }
 
 export function handleFile(file: string, options: IOptions = {})
@@ -241,24 +249,42 @@ export function handleFile(file: string, options: IOptions = {})
 
 	fs.writeFileSync(path.join(_dir, '~kindlehdunpack.log'), log);
 
-	fs.writeFileSync(path.join(_dir, 'info.txt'), `書籍名稱：\n${info.novel_title}\n\n${file}\n${options.output}`);
+	fs.writeFileSync(path.join(_dir, 'info.txt'), `書籍名稱：\n${info.book_title}\n\n${file}\n${options.output}`);
 
 	fs.moveSync(_dir, options.output);
 
 	options.log && console.gray.debug(`刪除暫存資料夾\n${tmpPath}`);
 	fs.removeSync(tmpPath);
 
-	options.log && console.success(`書籍名稱：\n${info.novel_title}\n\n${file}\n${options.output}`);
+	options.log && console.success(`書籍名稱：\n${info.book_title}\n\n${file}\n${options.output}`);
+
+	return {
+		/**
+		 * input file
+		 */
+		file,
+		/**
+		 * meta info
+		 */
+		info,
+		/**
+		 * output HDimages path
+		 */
+		HDimages: options.output,
+	}
 }
 
 export function parseLog(log: string | Buffer)
 {
 	log = log.toString();
 
-	let novel_title = (log.match(/^EXTH MetaData\r?\n([^\r\n]+)$/m) || [])[1];
+	let book_title = (log.match(/^EXTH MetaData\r?\n([^\r\n]+)$/m) || [])[1];
 
 	return {
-		novel_title,
+		/**
+		 * 書籍名稱
+		 */
+		book_title,
 	}
 }
 

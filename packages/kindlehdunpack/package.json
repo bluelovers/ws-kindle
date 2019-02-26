@@ -1,8 +1,9 @@
 {
   "name": "kindlehdunpack",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "以 node.js 包裝後的 kindlehdunpack",
   "keywords": [
+    "@node-kindle",
     "amazon",
     "azw",
     "azw.res",
@@ -22,6 +23,8 @@
     "image",
     "images",
     "kindle",
+    "kindlehdunpack",
+    "node-kindle",
     "node-novel",
     "novel",
     "pack",

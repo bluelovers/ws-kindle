@@ -25,11 +25,68 @@ export declare function tmppath(options?: IOptions): string;
 export declare function outputpath(options?: IOptions): string;
 export declare function _spawn(file: string, options?: IOptions): import("cross-spawn-extra").SpawnSyncReturns<Buffer>;
 export declare function listGlobFile(glob?: string[], options?: IOptions): string[];
-export declare function handleGlobFile(glob?: string[], options?: IOptions): void;
-export declare function handleFiles(files: string[], options?: IOptions): void;
-export declare function handleFile(file: string, options?: IOptions): void;
+export declare function handleGlobFile(glob?: string[], options?: IOptions): {
+    /**
+     * input file
+     */
+    file: string;
+    /**
+     * meta info
+     */
+    info: {
+        /**
+         * 書籍名稱
+         */
+        book_title: string;
+    };
+    /**
+     * output HDimages path
+     */
+    HDimages: string;
+}[];
+export declare function handleFiles(files: string[], options?: IOptions): {
+    /**
+     * input file
+     */
+    file: string;
+    /**
+     * meta info
+     */
+    info: {
+        /**
+         * 書籍名稱
+         */
+        book_title: string;
+    };
+    /**
+     * output HDimages path
+     */
+    HDimages: string;
+}[];
+export declare function handleFile(file: string, options?: IOptions): {
+    /**
+     * input file
+     */
+    file: string;
+    /**
+     * meta info
+     */
+    info: {
+        /**
+         * 書籍名稱
+         */
+        book_title: string;
+    };
+    /**
+     * output HDimages path
+     */
+    HDimages: string;
+};
 export declare function parseLog(log: string | Buffer): {
-    novel_title: string;
+    /**
+     * 書籍名稱
+     */
+    book_title: string;
 };
 export declare function handleOptions<T extends IOptions>(options?: T | IOptions): T & IOptions;
 declare const _default: typeof import(".");

@@ -3,6 +3,7 @@
  * Created by user on 2019/2/24.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+/// <reference types="node" />
 const path = require("path");
 const cross_spawn_extra_1 = require("cross-spawn-extra");
 const fs = require("fs-extra");
@@ -114,11 +115,12 @@ function handleGlobFile(glob, options = {}) {
     let files = listGlobFile(glob, options);
     if (files && files.length) {
         options.log && console.gray.info(files);
-        handleFiles(files, {
+        let r = handleFiles(files, {
             ...options,
             output,
         });
         options.log && console.debug(`結束`);
+        return r;
     }
     else {
         options.log && console.error(`沒有找到任何符合的檔案`);
@@ -128,12 +130,14 @@ function handleGlobFile(glob, options = {}) {
 exports.handleGlobFile = handleGlobFile;
 function handleFiles(files, options = {}) {
     const output = options && options.output;
-    files.forEach(function (file) {
-        handleFile(file, {
+    return files.reduce(function (a, file) {
+        let r = handleFile(file, {
             ...options,
             output,
         });
-    });
+        a.push(r);
+        return a;
+    }, []);
 }
 exports.handleFiles = handleFiles;
 function handleFile(file, options = {}) {
@@ -158,18 +162,35 @@ function handleFile(file, options = {}) {
     let info = parseLog(log);
     options.log && console.gray(log.toString());
     fs.writeFileSync(path.join(_dir, '~kindlehdunpack.log'), log);
-    fs.writeFileSync(path.join(_dir, 'info.txt'), `書籍名稱：\n${info.novel_title}\n\n${file}\n${options.output}`);
+    fs.writeFileSync(path.join(_dir, 'info.txt'), `書籍名稱：\n${info.book_title}\n\n${file}\n${options.output}`);
     fs.moveSync(_dir, options.output);
     options.log && console.gray.debug(`刪除暫存資料夾\n${tmpPath}`);
     fs.removeSync(tmpPath);
-    options.log && console.success(`書籍名稱：\n${info.novel_title}\n\n${file}\n${options.output}`);
+    options.log && console.success(`書籍名稱：\n${info.book_title}\n\n${file}\n${options.output}`);
+    return {
+        /**
+         * input file
+         */
+        file,
+        /**
+         * meta info
+         */
+        info,
+        /**
+         * output HDimages path
+         */
+        HDimages: options.output,
+    };
 }
 exports.handleFile = handleFile;
 function parseLog(log) {
     log = log.toString();
-    let novel_title = (log.match(/^EXTH MetaData\r?\n([^\r\n]+)$/m) || [])[1];
+    let book_title = (log.match(/^EXTH MetaData\r?\n([^\r\n]+)$/m) || [])[1];
     return {
-        novel_title,
+        /**
+         * 書籍名稱
+         */
+        book_title,
     };
 }
 exports.parseLog = parseLog;
